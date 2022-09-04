@@ -1,11 +1,13 @@
 package alen.util;
 
+
 import java.util.List;
 
 import alen.model.Djelatnik;
 
 public class DjelatnikCRUD {
-
+	
+	
 	public static Djelatnik unosNovog() {
 
 		Djelatnik d = new Djelatnik();
@@ -29,7 +31,7 @@ public class DjelatnikCRUD {
 		System.out.println();
 		System.out.println("Djelatnici");
 		for (Djelatnik d : djelatnici) {
-			System.out.println(dj++ + "." + d.getIme() + " " + d.getPrezime());
+			System.out.println(dj++ + "." + d.getIme() + " " + d.getPrezime() + " " + Datum.getSdf().format(d.getPocetakRada()));
 		}
 
 		System.out.println("---------------------");

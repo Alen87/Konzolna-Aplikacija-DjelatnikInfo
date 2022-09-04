@@ -1,7 +1,7 @@
 package alen.util;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
+
 
 import java.util.Date;
 
@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Pomocno {
 
 	public static Scanner ulaz;
+	
 
 	/**
 	 * Metoda osigurava unos cjelog broja koji može biti u cijelom rasponu int tip
@@ -113,16 +114,14 @@ public class Pomocno {
 		}
 	}
 
-	public static final String FORMAT_DATUM = "dd.MM.yyyy.";
-
 	public static Date ucitajDatum(String poruka) {
-		SimpleDateFormat df = new SimpleDateFormat(FORMAT_DATUM);
+
 		while (true) {
 			System.out.print(poruka);
 			try {
-				return df.parse(ulaz.nextLine());
+				return  Datum.getSdf().parse(ulaz.nextLine());
 			} catch (Exception e) {
-				System.out.println("Ne ispravan format datuma. " + "Primjer unosa: " + df.format(new Date()));
+				System.out.println("Neispravan format datuma. Primjer unosa: " + Datum.getSdf().format(new Date()));
 			}
 		}
 	}

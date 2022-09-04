@@ -1,0 +1,40 @@
+{
+  "djelatnici": [
+    {
+      "ime": "Alen",
+      "prezime": "Boric",
+      "email": "boricalen@live.com",
+      "pocetakRada": "2015-04-23T00:00:00.000+0200",
+      "loyalityKartica": "334567",
+      "radnaOdjecaObuca": "majica",
+      "ugovor": "gastro",
+      "zavrsenoZanimanje": "elektricar",
+      "sifra": 1
+    },
+    {
+      "ime": "Matej",
+      "prezime": "Cindric",
+      "email": "cindricmatej@live.com",
+      "pocetakRada": "2015-04-04T00:00:00.000+0200",
+      "loyalityKartica": "32434",
+      "radnaOdjecaObuca": "majica",
+      "ugovor": "gastro",
+      "zavrsenoZanimanje": "pekar",
+      "sifra": 2
+    },
+    {
+      "ime": "Josip",
+      "prezime": "Nad",
+      "email": "nadjosip@live.com",
+      "pocetakRada": "2010-05-05T00:00:00.000+0200",
+      "loyalityKartica": "32454",
+      "radnaOdjecaObuca": "majica",
+      "ugovor": "pekar",
+      "zavrsenoZanimanje": "pekar",
+      "sifra": 3
+    }
+  ],
+  "edukacije": [],
+  "mobiteli": [],
+  "saniterneIskaznice": []
+}

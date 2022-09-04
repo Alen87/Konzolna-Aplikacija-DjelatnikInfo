@@ -44,7 +44,7 @@ public class EdukacijaCRUD {
 		System.out.println("");
 		System.out.println("Edukacije  u  aplikaciji");
 		for (Edukacija e : edukacije) {
-			System.out.println(rb++ + ". " + e.getNaziv() + " " + e.getVoditeljEdukacije() + " " + e.getDatum() + "  "
+			System.out.println(rb++ + ". " + e.getNaziv() + " " + e.getVoditeljEdukacije() + " " + Datum.getSdf().format(e.getDatum())+ "  "
 					+ e.getTrajanjeEdukacijeMin());
 
 			for (DjelatnikEdukacija dj : e.getDjelatniciNaEdukacijama()) {
@@ -60,7 +60,7 @@ public class EdukacijaCRUD {
 			List<DjelatnikEdukacija> djelatniciNaEdukacijama) {
 		e.setSifra(Pomocno.ucitajInt("sifra (" + e.getSifra() + ")", true));
 		e.setNaziv(Pomocno.ucitajString("Naziv ( " + e.getNaziv() + ")"));
-		e.setDatum(Pomocno.ucitajDatum("Datum odrzavanja  edukacije ( " + e.getDatum() + ")"));
+		e.setDatum(Pomocno.ucitajDatum("Datum odrzavanja  edukacije ( " + Datum.getSdf().format(e.getDatum()) + ")"));
 		e.setVoditeljEdukacije(Pomocno.ucitajString("Voditelj edukacije ( " + e.getVoditeljEdukacije() + ")"));
 		e.setTrajanjeEdukacijeMin(Pomocno.unesiBigDecimal("Unesi vrijeme trajanja  edukacije"));
 

@@ -1,10 +1,11 @@
 package alen;
 
-import java.awt.Window.Type;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ import alen.model.DjelatnikEdukacija;
 import alen.model.Edukacija;
 import alen.model.Mobitel;
 import alen.model.SanitarnaIskaznica;
+import alen.util.Datum;
 import alen.util.DjelatnikCRUD;
 import alen.util.EdukacijaCRUD;
 import alen.util.MobitelCRUD;
@@ -40,7 +42,10 @@ public class Start {
 		djelatnici = new ArrayList();
 		edukacije = new ArrayList();
 		djelatniciNaEdukacijama = new ArrayList();
+		Datum.setFormat("dd.MM.yyyy");
+		Datum.setSdf(new SimpleDateFormat(Datum.getFormat()));
 		procitajSDiska();
+
 		Pomocno.ulaz = new Scanner(System.in);
 		System.out.println("********* Djelatnik info aplikacija V1 *********");
 		izbornik();
@@ -80,6 +85,7 @@ public class Start {
 		switch (Pomocno.ucitajInt("Odaberi akciju", 1, 5)) {
 		case 1:
 			djelatnici.add(DjelatnikCRUD.unosNovog());
+			spremiNaDisk();
 			djelatnici();
 			break;
 		case 2:
@@ -114,6 +120,7 @@ public class Start {
 		switch (Pomocno.ucitajInt("Odaberi akciju", 1, 5)) {
 		case 1:
 			edukacije.add(EdukacijaCRUD.unosNove(djelatnici, djelatniciNaEdukacijama));
+			spremiNaDisk();
 			edukacije();
 			break;
 		case 2:
@@ -150,6 +157,7 @@ public class Start {
 
 		case 1:
 			mobiteli.add(MobitelCRUD.unosNovog(djelatnici));
+			spremiNaDisk();
 			mobiteli();
 			break;
 		case 2:
@@ -184,6 +192,7 @@ public class Start {
 		switch (Pomocno.ucitajInt("Odaberi akciju", 1, 5)) {
 		case 1:
 			sanitarnaIskaznica.add(SanitarnaIskaznicaCRUD.unosNove(djelatnici));
+			spremiNaDisk();
 			sanitarneIskaznice();
 			break;
 		case 2:
@@ -234,21 +243,19 @@ public class Start {
 	public static void main(String[] args) {
 		new Start();
 	}
-	
-	
+
 	private void procitajSDiska() {
-		Gson g=new Gson();
-		
-		Type dataType = (new TypeToken<Spremanje>()
-		{
+		Gson g = new Gson();
+
+		Type dataType = (new TypeToken<Spremanje>() {
 		}).getType();
 
 		try {
 			Spremanje s = g.fromJson(Files.readString(Path.of("podaci.json")), dataType);
-			this.djelatnici=s.getDjelatnici();
-			this.edukacije=s.getEdukacije();
-			this.mobiteli=s.getMobiteli();
-			this.sanitarnaIskaznica=s.getSaniterneIskaznice();
+			this.djelatnici = s.getDjelatnici();
+			this.edukacije = s.getEdukacije();
+			this.mobiteli = s.getMobiteli();
+			this.sanitarnaIskaznica = s.getSaniterneIskaznice();
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -257,37 +264,33 @@ public class Start {
 			e.printStackTrace();
 		}
 	}
-		
+
 	private void spremiNaDisk() {
 		Spremanje s = new Spremanje();
 		s.setDjelatnici(djelatnici);
 		s.setEdukacije(edukacije);
 		s.setMobiteli(mobiteli);
-		s.setSaniterneIskaznice(sanitarnaIskaznica);	
-		
-		ExclusionStrategy strategija = new ExclusionStrategy(){
-            @Override
-            public boolean shouldSkipField(FieldAttributes fa) {
-                if(fa.getDeclaringClass()==DjelatnikEdukacija.class && fa.getName().equals("edukacija")){
-                    return true;
-                }
-                return false;
-            }
+		s.setSaniterneIskaznice(sanitarnaIskaznica);
 
-            @Override
-            public boolean shouldSkipClass(Class<?> type) {
-                return false;
-            }
-            
-        };
-        
-        
-        Gson gson = new GsonBuilder()
-                .setExclusionStrategies(strategija)
-                .setPrettyPrinting()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                .create();
-		
+		ExclusionStrategy strategija = new ExclusionStrategy() {
+			@Override
+			public boolean shouldSkipField(FieldAttributes fa) {
+				if (fa.getDeclaringClass() == DjelatnikEdukacija.class && fa.getName().equals("edukacija")) {
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public boolean shouldSkipClass(Class<?> type) {
+				return false;
+			}
+
+		};
+
+		Gson gson = new GsonBuilder().setExclusionStrategies(strategija).setPrettyPrinting()
+				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+
 		try {
 			FileWriter fw = new FileWriter("podaci.json");
 			fw.write(gson.toJson(s));
@@ -296,8 +299,7 @@ public class Start {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
 
 }
