@@ -42,6 +42,7 @@ public class Start {
 		djelatnici = new ArrayList();
 		edukacije = new ArrayList();
 		djelatniciNaEdukacijama = new ArrayList();
+		
 		Datum.setFormat("dd.MM.yyyy");
 		Datum.setSdf(new SimpleDateFormat(Datum.getFormat()));
 		procitajSDiska();

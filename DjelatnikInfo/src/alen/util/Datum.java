@@ -8,8 +8,7 @@ public class Datum {
 	private static  SimpleDateFormat sdf;
 	
 	
-	
-	public static String getFormat() {
+		public static String getFormat() {
 		return format;
 	}
 	public static void setFormat(String format) {

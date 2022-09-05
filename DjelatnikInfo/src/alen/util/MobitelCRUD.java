@@ -28,7 +28,7 @@ public class MobitelCRUD {
 		System.out.println("Mobiteli  u  aplikaciji");
 		for (Mobitel m : mobiteli) {
 			System.out.println(rb++ + "." + m.getSifra() + " " + m.getNaziv() + " " + m.getBroj() + " "
-					+ m.getDatumZaprimanja() + " " + m.getPravoNaSlijedeci() + " " + m.getSerijskiBroj() + " "
+					+ Datum.getSdf().format(m.getDatumZaprimanja()) + " " + Datum.getSdf().format(m.getPravoNaSlijedeci()) + " " + m.getSerijskiBroj() + " "
 					+ m.getDjelatnik().getIme() + " " + m.getDjelatnik().getPrezime());
 		}
 
@@ -39,8 +39,8 @@ public class MobitelCRUD {
 		m.setSifra(Pomocno.ucitajInt("sifra (" + m.getSifra() + ")", true));
 		m.setNaziv(Pomocno.ucitajString("Naziv mobilnog uredaja (" + m.getNaziv() + " ) "));
 		m.setBroj(Pomocno.ucitajString("Kontakt  broj ( " + m.getBroj() + " ) "));
-		m.setDatumZaprimanja(Pomocno.ucitajDatum(" Datum zaprimanja ( " + m.getDatumZaprimanja() + " ) "));
-		m.setPravoNaSlijedeci(Pomocno.ucitajDatum(" Pravo na  slijedeci ( " + m.getPravoNaSlijedeci() + " ) "));
+		m.setDatumZaprimanja(Pomocno.ucitajDatum(" Datum zaprimanja ( " + Datum.getSdf().format(m.getDatumZaprimanja()) + " ) "));
+		m.setPravoNaSlijedeci(Pomocno.ucitajDatum(" Pravo na  slijedeci ( " + Datum.getSdf().format(m.getPravoNaSlijedeci())+ " ) "));
 		m.setSerijskiBroj(Pomocno.ucitajString("Serijeski broj uredaja (" + m.getSerijskiBroj() + " ) "));
 		m.setDjelatnik(djelatnici.get(Pomocno.ucitajInt("Odaberi djelatnika", 1, djelatnici.size()) - 1));
 	}

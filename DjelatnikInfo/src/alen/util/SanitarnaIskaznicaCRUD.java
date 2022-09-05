@@ -30,7 +30,7 @@ public class SanitarnaIskaznicaCRUD {
 		System.out.println("Sanitarne iskaznice  u  aplikaciji");
 		for (SanitarnaIskaznica si : sanitarnaIskaznica) {
 			System.out.println(rb++ + ". " + si.getSifra() + " " + si.getBrojIskaznice() + " "
-					+ si.getDatumObavljenogPregleda() + " " + si.getVrijediDo() + " " + si.getDjelatnik().getIme() + " "
+					+ Datum.getSdf().format(si.getDatumObavljenogPregleda()) + " " + Datum.getSdf().format(si.getVrijediDo()) + " " + si.getDjelatnik().getIme() + " "
 					+ si.getDjelatnik().getPrezime());
 
 		}
@@ -43,7 +43,7 @@ public class SanitarnaIskaznicaCRUD {
 		si.setSifra(Pomocno.ucitajInt("sifra (" + si.getSifra() + ")", true));
 		si.setBrojIskaznice(Pomocno.ucitajString("broj iskaznice (" + si.getBrojIskaznice() + " ) "));
 		si.setDatumObavljenogPregleda(
-				Pomocno.ucitajDatum("datum pregleda (" + si.getDatumObavljenogPregleda() + " ) "));
+				Pomocno.ucitajDatum("datum pregleda (" + Datum.getSdf().format(si.getDatumObavljenogPregleda()) + " ) "));
 		si.setVrijediDo(Pomocno.ucitajDatum("vrijedi do ( " + si.getBrojIskaznice() + " ) "));
 		si.setCijenaKn(Pomocno.unesiBigDecimal("cijena (" + si.getCijenaKn() + " ) "));
 		si.setDjelatnik(djelatnici.get(Pomocno.ucitajInt("Odaberi djelatnika :", 1, djelatnici.size()) - 1));
